@@ -1,2 +1,23 @@
-Use this file to submit the extra credit problem. Be sure to describe your
-process for solving the problem, and not just to give the solution. 
+function decrypted_mssg = caesarDecode(encrypted_mssg) %caesarDecode is used to decrypt a mssg that is encrypted using a caesar cipher. 
+    jump = 3; %Caesar Cipher shift; itshifts letters of the alphabet by a fixed number of positions (in this case, 3) to encode a message. 
+    decrypted_mssg = ''; %empty string for the decoded message
+    
+    for i = 1:length(encrypted_mssg) %The loop runs for as many characters as there are in encrypted_mssg
+        charcode = double(encrypted_mssg(i)); %double function converts character to its numeric code 
+  
+        if charcode >= double('A') && charcode <= double('Z')
+            new_charcode = charcode - jump; % this will shift the charactercode back by 3 within the A-Z range
+            if new_charcode < double('A')
+                new_charcode = new_charcode + 26; % Wrap around if it goes before 'A'
+            end
+            decrypted_mssg(i) = char(new_charcode); %converts into letters and decodes the message
+        else
+            decrypted_mssg(i) = encrypted_mssg(i); % this will keep the spaces and punctuation marks the same. 
+        end
+    end
+end
+
+% to get the output, in the command window type: 
+%encrypted_mssg = 'L ZLVK LW QHHG QRW KDYH KDSSHQHG LQ PB WLPH, VDLG IURGR. VR GR L, VDLG JDQGDOI, DQG VR GR DOO ZKR %OLYH WR VHH VXFK WLPHV. EXW WKDW LV QRW IRU WKHP WR GHFLGH. DOO ZH KDYH WR GHFLGH LV ZKDW WR GR ZLWK WKH WLPH WKDW LV %JLYHQ, XV.';
+%decrypted_mssg = caesarDecode(encrypted_mssg);
+%disp(decrypted_mssg);
